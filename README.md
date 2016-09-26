@@ -1,7 +1,7 @@
 # balance-calculation
 
-##Before start up application ensure that MYSQL server is running and database with name "db" exist.
-##To start service run org.task.config.Application without parameters or use maven command : mvn spring-boot:run
+####Before start up application ensure that MYSQL server is running and database with name "db" exist.
+####To start service run org.task.config.Application without parameters or use maven command : mvn spring-boot:run
 
 ##For start task balance calculation call:
 ```
