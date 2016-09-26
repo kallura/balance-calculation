@@ -34,13 +34,13 @@ public class BalanceRepositoryImpl implements BalanceRepository {
                                 "    SUM(amount) - (SELECT \n" +
                                 "            SUM(amount)\n" +
                                 "        FROM\n" +
-                                "            transaction_table\n" +
+                                "            transactions\n" +
                                 "        WHERE\n" +
                                 "            sender_Id = ? AND YEAR(time) = ?\n" +
                                 "                AND MONTH(time) > ?\n" +
                                 "                AND time <= ?) AS balance\n" +
                                 "FROM\n" +
-                                "    transaction_table\n" +
+                                "    transactions\n" +
                                 "WHERE\n" +
                                 "    receiver_id = ? AND YEAR(time) = ?\n" +
                                 "        AND MONTH(time) > ?\n" +
@@ -59,6 +59,4 @@ public class BalanceRepositoryImpl implements BalanceRepository {
         }
         return balance;
     }
-
-
 }

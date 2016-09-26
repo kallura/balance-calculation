@@ -3,6 +3,7 @@ package org.test;
 import org.test.exceptions.NotFoundTaskException;
 import org.test.tasks.TaskMonitor;
 
+import javax.annotation.PreDestroy;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -35,5 +36,10 @@ public class TaskMonitorExecutorImpl implements TaskMonitorExecutor {
         }
         resultFuture.cancel(true);
         tasks.remove(taskId);
+    }
+
+    @PreDestroy
+    public void cleanUp() {
+        poolExecutors.shutdown();
     }
 }

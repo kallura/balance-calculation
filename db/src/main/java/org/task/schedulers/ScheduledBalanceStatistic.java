@@ -7,7 +7,6 @@ import org.task.repositories.BalanceStatisticRepository;
 
 import java.util.List;
 
-
 public class ScheduledBalanceStatistic {
 
     @Autowired

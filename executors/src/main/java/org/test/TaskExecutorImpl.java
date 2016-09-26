@@ -7,33 +7,33 @@ import org.test.exceptions.OverloadException;
 import org.test.exceptions.TimeoutTaskException;
 import org.test.tasks.Task;
 
+import javax.annotation.PreDestroy;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.*;
 
-
 public class TaskExecutorImpl implements TaskExecutor {
-
 
     @Autowired
     private TaskMonitorExecutor taskMonitorExecutor;
 
     private final ExecutorService poolExecutors;
     private final Map<String, Integer> timeouts = new LinkedHashMap<>();
-    private final Map<String, Future<Balance>> tasks = new LinkedHashMap<>();;
+    private final Map<String, Future<Balance>> tasks = new LinkedHashMap<>();
+    ;
     private final Integer defaultTimeout;
     private final Integer executorMapSize;
 
     public TaskExecutorImpl(Integer defaultTimeout, Integer executorMapSize, Integer threadPoolSize) {
         this.defaultTimeout = defaultTimeout;
-        this.executorMapSize=executorMapSize;
+        this.executorMapSize = executorMapSize;
         poolExecutors = Executors.newFixedThreadPool(threadPoolSize);
     }
 
     @Override
     public String execute(Task task) throws OverloadException {
-        if (tasks.size() > executorMapSize){
+        if (tasks.size() > executorMapSize) {
             throw new OverloadException("The server is currently unable!");
         }
         String taskId = UUID.randomUUID().toString();
@@ -70,5 +70,10 @@ public class TaskExecutorImpl implements TaskExecutor {
         taskMonitorExecutor.cancel(taskId);
         tasks.remove(taskId);
         timeouts.remove(taskId);
+    }
+
+    @PreDestroy
+    public void cleanUp() {
+        poolExecutors.shutdown();
     }
 }

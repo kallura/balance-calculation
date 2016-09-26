@@ -31,9 +31,9 @@ public class BalanceRepositoryTest {
         jdbcTemplate.execute("insert into customers (id, customer_name) values (1, 'customer1')");
         jdbcTemplate.execute("insert into customers (id, customer_name) values (2, 'customer2')");
         jdbcTemplate.execute("insert into balance_statistic (customer_id, balance, time) values (1, 5000, '2016-09-30 23:59:00')");
-        jdbcTemplate.execute("insert into transaction_table (time, amount, sender_id, receiver_id) values ('2016-10-01 19:07:11', 500, 1, 2)");
-        jdbcTemplate.execute("insert into transaction_table (time, amount, sender_id, receiver_id) values ('2016-10-01 20:07:11', 500, 1, 2)");
-        jdbcTemplate.execute("insert into transaction_table (time, amount, sender_id, receiver_id) values ('2016-10-01 20:07:11', 1500, 2, 1)");
+        jdbcTemplate.execute("insert into transactions (time, amount, sender_id, receiver_id) values ('2016-10-01 19:07:11', 500, 1, 2)");
+        jdbcTemplate.execute("insert into transactions (time, amount, sender_id, receiver_id) values ('2016-10-01 20:07:11', 500, 1, 2)");
+        jdbcTemplate.execute("insert into transactions (time, amount, sender_id, receiver_id) values ('2016-10-01 20:07:11', 1500, 2, 1)");
     }
 
     @Test

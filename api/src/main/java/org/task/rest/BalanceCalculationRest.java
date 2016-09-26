@@ -14,26 +14,27 @@ import org.test.tasks.TaskConditions;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-@RestController("/")
+@RestController
+@RequestMapping("/balance")
 public class BalanceCalculationRest {
 
     @Autowired
     private TaskExecutor taskExecutor;
     @Autowired
-    BalanceRepository balanceRepository;
+    private BalanceRepository balanceRepository;
 
-    @RequestMapping(value = "/balance", method = RequestMethod.POST)
-    public String calculateBalance(@RequestBody TaskConditions filter) throws OverloadException {
-        return taskExecutor.execute(new Task(filter, balanceRepository));
+    @RequestMapping(method = RequestMethod.POST)
+    public String calculateBalance(@RequestBody TaskConditions conditions) throws OverloadException {
+        return taskExecutor.execute(new Task(conditions, balanceRepository));
     }
 
-    @RequestMapping(value = "/balance/{taskId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{taskId}", method = RequestMethod.GET)
     public @ResponseBody Balance get(@PathVariable String taskId) throws InterruptedException,
             ExecutionException, TimeoutException, TimeoutTaskException, NotFoundTaskException {
         return taskExecutor.get(taskId);
     }
 
-    @RequestMapping(value = "/balance/cancel/{taskId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{taskId}", method = RequestMethod.DELETE)
     public void cancel(@PathVariable String taskId) throws NotFoundTaskException {
         taskExecutor.cancel(taskId);
     }

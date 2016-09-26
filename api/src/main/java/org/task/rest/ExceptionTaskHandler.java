@@ -20,32 +20,30 @@ public class ExceptionTaskHandler {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Task not found")
     @ExceptionHandler(NotFoundTaskException.class)
     public void taskNotFoundException(NotFoundTaskException e) {
-        logger.error(e.getMessage());
+        logger.info(e.getMessage(), e);
     }
 
     @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT, reason = "Read timeout")
     @ExceptionHandler(TimeoutTaskException.class)
     public void taskTimeoutException(TimeoutTaskException e) {
-        logger.error(e.getMessage());
+        logger.warn(e.getMessage(), e);
     }
 
     @ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Task was canceled")
     @ExceptionHandler(CancellationException.class)
     public void cancelException(CancellationException e) {
-        logger.error(e.getMessage());
+        logger.warn(e.getMessage(), e);
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Server error")
     @ExceptionHandler(RuntimeException.class)
     public void serverException(RuntimeException e) {
-        logger.error(e.getMessage());
+        logger.error(e.getMessage(), e);
     }
 
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE, reason = "The server is currently unable!")
     @ExceptionHandler(OverloadException.class)
     public void serverOverloadException(OverloadException e) {
-        logger.error(e.getMessage());
+        logger.error(e.getMessage(), e);
     }
-
-
 }

@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-
 public class BalanceStatisticRepositoryImpl implements BalanceStatisticRepository {
 
     @Autowired
@@ -40,7 +39,7 @@ public class BalanceStatisticRepositoryImpl implements BalanceStatisticRepositor
                 "            DATE_FORMAT(time, '%Y-%m') dt,\n" +
                 "            SUM(amount) amount\n" +
                 "    FROM\n" +
-                "        db.transaction_table t\n" +
+                "        db.transactions t\n" +
                 "    WHERE\n" +
                 "        DATE_FORMAT(time, '%Y-%m') > COALESCE((SELECT \n" +
                 "                MAX(DATE_FORMAT(time, '%Y-%m'))\n" +
@@ -54,7 +53,7 @@ public class BalanceStatisticRepositoryImpl implements BalanceStatisticRepositor
                 "            DATE_FORMAT(time, '%Y-%m') dt,\n" +
                 "            SUM(amount) amount\n" +
                 "    FROM\n" +
-                "        db.transaction_table t\n" +
+                "        db.transactions t\n" +
                 "    WHERE\n" +
                 "        DATE_FORMAT(time, '%Y-%m') > COALESCE((SELECT \n" +
                 "                MAX(DATE_FORMAT(time, '%Y-%m'))\n" +

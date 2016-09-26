@@ -1,6 +1,5 @@
 package org.task.repositories;
 
-
 import org.task.models.BalanceStatistic;
 
 import java.math.BigDecimal;
